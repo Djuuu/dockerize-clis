@@ -5,6 +5,7 @@
 # https://gist.github.com/flyingluscas/a2fc4e637f3d967d427105055f6be8cd
 #
 
+
 ################################################################################
 # Windows quirks & workarounds
 
@@ -30,20 +31,30 @@ function abspath {
     echo $1
 }
 
+
+################################################################################
+# Common configuration
+
+DOCKERIZE_CLIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Volumes mounted in every container
+DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
+# # non-existant user workaround (Linux/Unices)
+# DOCKER_COMMON_VOLUMES="--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro"
+
+
 ################################################################################
 # Load scripts
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-# Init environment variables
-source $CURRENT_DIR/env.sh
-
 # PHP-related commands
-source $CURRENT_DIR/dockerize-clis-node.sh
+source $DOCKERIZE_CLIS_DIR/dockerize-clis-node.sh
 
 # NodeJS-related commands
-source $CURRENT_DIR/dockerize-clis-php.sh
+source $DOCKERIZE_CLIS_DIR/dockerize-clis-php.sh
 
+
+################################################################################
+# Common utilities
 
 function docker_clis_pull {
     docker pull php:$PHP_VERSION-cli
@@ -68,5 +79,5 @@ function docker_clis_env {
     echo "NODE_USER          : $NODE_USER"
     echo "NODE_USER_HOME     : $NODE_USER_HOME"
     echo ""
-    echo "DOCKER_ETC_VOLUMES : $DOCKER_ETC_VOLUMES"
+    echo "DOCKER_COMMON_VOLUMES : $DOCKER_COMMON_VOLUMES"
 }

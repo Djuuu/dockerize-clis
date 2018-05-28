@@ -58,6 +58,6 @@ NODE_PUBLISH_PORTS="" # ex: "--publish 3000:3000"
 NODE_USER=$(id -u):$(id -g) # or: node
 NODE_USER_HOME=$HOME # or: /home/node
 
-DOCKER_ETC_VOLUMES="" # ex: "--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro" 
-                      # (non-existant user workaround, for Unices)
+DOCKER_COMMON_VOLUMES="" # ex: "--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro" 
+                         # (non-existant user workaround, for Unices)
 ```
