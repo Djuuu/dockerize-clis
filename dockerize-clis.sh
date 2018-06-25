@@ -59,6 +59,7 @@ source $DOCKERIZE_CLIS_DIR/dockerize-clis-php.sh
 function docker_clis_pull {
     docker pull php:$PHP_VERSION-cli
     docker pull composer
+    docker pull phpstan/phpstan
     docker pull node:$NODE_VERSION
 }
 

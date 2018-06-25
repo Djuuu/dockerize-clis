@@ -2,6 +2,7 @@
 DOCKERIZE_PHP=${DOCKERIZE_PHP:-false}
 DOCKERIZE_COMPOSER=${DOCKERIZE_COMPOSER:-false}
 DOCKERIZE_PHPUNIT=${DOCKERIZE_PHPUNIT:-false}
+DOCKERIZE_PHPSTAN=${DOCKERIZE_PHPSTAN:-false}
 
 PHP_VERSION=${PHP_VERSION:-7.2}
 
@@ -40,5 +41,15 @@ fi
 if [ "$DOCKERIZE_PHPUNIT" = true ]; then
     function phpunit {
         php vendor/phpunit/phpunit/phpunit "$@"
+    }
+fi
+
+if [ "$DOCKERIZE_PHPSTAN" = true ]; then
+    function phpstan {
+        tty=
+        tty -s && tty=--tty
+        docker run $tty --interactive --rm \
+            --volume $(abspath $(pwd)):/app \
+            phpstan/phpstan "$@"
     }
 fi

@@ -43,6 +43,8 @@ Here are all the used variables, with their default value and suggestions.
 DOCKERIZE_PHP=false
 DOCKERIZE_COMPOSER=false
 DOCKERIZE_PHPUNIT=false
+DOCKERIZE_PHPSTAN=false
+
 DOCKERIZE_NODE=false
 DOCKERIZE_NPM=false
 DOCKERIZE_YARN=false
