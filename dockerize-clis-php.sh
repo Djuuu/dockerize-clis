@@ -9,6 +9,7 @@ PHP_VERSION=${PHP_VERSION:-7.2}
 PHP_PUBLISH_PORTS=${PHP_PUBLISH_PORTS:-""} # ex: "--publish 8000:8000"
 PHP_USER=${PHP_USER:-$(id -u):$(id -g)}
 
+COMPOSER_HOME=${COMPOSER_HOME:-$HOME/.composer}
 
 if [ "$DOCKERIZE_PHP" = true ]; then
     function php {
@@ -31,8 +32,8 @@ if [ "$DOCKERIZE_COMPOSER" = true ]; then
         docker run $tty --interactive --rm \
             --user $PHP_USER \
             $DOCKER_COMMON_VOLUMES \
+            --volume $(abspath $COMPOSER_HOME):/tmp \
             --volume $(abspath $(pwd)):/code \
-            --volume $(abspath $HOME/.config/composer):/composer \
             --workdir $(abspath '/code') \
             composer "$@"
     }
