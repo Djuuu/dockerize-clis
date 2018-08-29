@@ -37,6 +37,17 @@ if [ "$DOCKERIZE_COMPOSER" = true ]; then
             --workdir $(abspath '/code') \
             composer "$@"
     }
+
+    function laravel {
+	    if [ ! -f "$COMPOSER_HOME/vendor/bin/laravel" ]; then
+	        echo "Installing Laravel Installer globally..."
+	        echo ""
+	        composer global require "laravel/installer"
+	        echo ""
+	    fi
+
+		composer $(abspath '/tmp/vendor/bin/laravel') "$@"
+    }
 fi
 
 if [ "$DOCKERIZE_PHPUNIT" = true ]; then
