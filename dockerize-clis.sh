@@ -46,6 +46,9 @@ DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
 ################################################################################
 # Load scripts
 
+# Shell-related commands
+source $DOCKERIZE_CLIS_DIR/dockerize-clis-shell.sh
+
 # PHP-related commands
 source $DOCKERIZE_CLIS_DIR/dockerize-clis-node.sh
 
@@ -61,16 +64,18 @@ function docker_clis_pull {
     docker pull composer
     docker pull phpstan/phpstan
     docker pull node:$NODE_VERSION
+    docker pull koalaman/shellcheck:$SHELLCHECK_VERSION
 }
 
 function docker_clis_env {
-    echo "DOCKERIZE_PHP      : $DOCKERIZE_PHP"
-    echo "DOCKERIZE_COMPOSER : $DOCKERIZE_COMPOSER"
-    echo "DOCKERIZE_PHPUNIT  : $DOCKERIZE_PHPUNIT"
-    echo "DOCKERIZE_PHPSTAN  : $DOCKERIZE_PHPSTAN"
-    echo "DOCKERIZE_NODE     : $DOCKERIZE_NODE"
-    echo "DOCKERIZE_NPM      : $DOCKERIZE_NPM"
-    echo "DOCKERIZE_YARN     : $DOCKERIZE_YARN"
+    echo "DOCKERIZE_PHP        : $DOCKERIZE_PHP"
+    echo "DOCKERIZE_COMPOSER   : $DOCKERIZE_COMPOSER"
+    echo "DOCKERIZE_PHPUNIT    : $DOCKERIZE_PHPUNIT"
+    echo "DOCKERIZE_PHPSTAN    : $DOCKERIZE_PHPSTAN"
+    echo "DOCKERIZE_NODE       : $DOCKERIZE_NODE"
+    echo "DOCKERIZE_NPM        : $DOCKERIZE_NPM"
+    echo "DOCKERIZE_YARN       : $DOCKERIZE_YARN"
+    echo "DOCKERIZE_SHELLCHECK : $DOCKERIZE_SHELLCHECK"
     echo ""
     echo "PHP_VERSION        : $PHP_VERSION"
     echo "PHP_PUBLISH_PORTS  : $PHP_PUBLISH_PORTS"
@@ -82,6 +87,8 @@ function docker_clis_env {
     echo "NODE_PUBLISH_PORTS : $NODE_PUBLISH_PORTS"
     echo "NODE_USER          : $NODE_USER"
     echo "NODE_USER_HOME     : $NODE_USER_HOME"
+    echo ""
+    echo "SHELLCHECK_VERSION: $SHELLCHECK_VERSION"
     echo ""
     echo "DOCKER_COMMON_VOLUMES : $DOCKER_COMMON_VOLUMES"
 }

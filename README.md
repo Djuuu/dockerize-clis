@@ -49,6 +49,8 @@ DOCKERIZE_NODE=false
 DOCKERIZE_NPM=false
 DOCKERIZE_YARN=false
 
+DOCKERIZE_SHELLCHECK=true
+
 PHP_VERSION=7.2
 
 PHP_PUBLISH_PORTS="" # ex: "--publish 8000:8000"
@@ -59,6 +61,8 @@ NODE_VERSION=8
 NODE_PUBLISH_PORTS="" # ex: "--publish 3000:3000"
 NODE_USER=$(id -u):$(id -g) # or: node
 NODE_USER_HOME=$HOME # or: /home/node
+
+SHELLCHECK_VERSION=stable
 
 DOCKER_COMMON_VOLUMES="" # ex: "--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro" 
                          # (non-existant user workaround, for Unices)
