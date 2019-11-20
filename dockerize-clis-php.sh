@@ -27,6 +27,9 @@ fi
 
 if [ "$DOCKERIZE_COMPOSER" = true ]; then
     function composer {
+
+        [ ! -d "$COMPOSER_HOME" ] && echo "Creating \$COMPOSER_HOME directory ($COMPOSER_HOME)" && mkdir $COMPOSER_HOME
+
         tty=
         tty -s && tty=--tty
         docker run $tty --interactive --rm \

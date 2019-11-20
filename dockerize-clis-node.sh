@@ -28,6 +28,10 @@ fi
 
 if [ "$DOCKERIZE_NPM" = true ]; then
     function npm {
+
+        [ ! -d "$HOME/.config" ] && echo "Creating \$HOME/.config directory ($HOME/.config)" && mkdir $HOME/.config
+        [ ! -d "$HOME/.npm" ]    && echo "Creating \$HOME/.npm directory ($HOME/.npm)"       && mkdir $HOME/.npm
+
         tty=
         tty -s && tty=--tty
         docker run $tty --interactive --rm \
@@ -47,6 +51,11 @@ if [ "$DOCKERIZE_YARN" = true ]; then
     function yarn {
         yarnFile="$HOME/.yarnrc"
         [ ! -f $yarnFile ] && touch $yarnFile
+
+        [ ! -d "$HOME/.config" ] && echo "Creating \$HOME/.config directory ($HOME/.config)" && mkdir $HOME/.config
+        [ ! -d "$HOME/.cache" ]  && echo "Creating \$HOME/.cache directory ($HOME/.cache)"   && mkdir $HOME/.cache
+        [ ! -d "$HOME/.npm" ]    && echo "Creating \$HOME/.npm directory ($HOME/.npm)"       && mkdir $HOME/.npm
+
         tty=
         tty -s && tty=--tty
         docker run $tty --interactive --rm \
