@@ -18,8 +18,8 @@ if [ "$DOCKERIZE_PHP" = true ]; then
         docker run $tty --interactive --rm \
             --user $PHP_USER \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $(pwd)):/code \
-            --workdir $(abspath '/code') \
+            --volume $(dockerize_bind_path $(pwd)):/code \
+            --workdir $(dockerize_path '/code') \
             $PHP_PUBLISH_PORTS \
             php:$PHP_VERSION-cli php "$@"
     }
@@ -32,9 +32,9 @@ if [ "$DOCKERIZE_COMPOSER" = true ]; then
         docker run $tty --interactive --rm \
             --user $PHP_USER \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $COMPOSER_HOME):/tmp \
-            --volume $(abspath $(pwd)):/code \
-            --workdir $(abspath '/code') \
+            --volume $(dockerize_bind_path $COMPOSER_HOME):/tmp \
+            --volume $(dockerize_bind_path $(pwd)):/code \
+            --workdir $(dockerize_path '/code') \
             composer "$@"
     }
 
@@ -46,7 +46,7 @@ if [ "$DOCKERIZE_COMPOSER" = true ]; then
 	        echo ""
 	    fi
 
-		composer $(abspath '/tmp/vendor/bin/laravel') "$@"
+		composer $(dockerize_path '/tmp/vendor/bin/laravel') "$@"
     }
 fi
 
@@ -61,7 +61,7 @@ if [ "$DOCKERIZE_PHPSTAN" = true ]; then
         tty=
         tty -s && tty=--tty
         docker run $tty --interactive --rm \
-            --volume $(abspath $(pwd)):/app \
+            --volume $(dockerize_bind_path $(pwd)):/app \
             phpstan/phpstan "$@"
     }
 fi

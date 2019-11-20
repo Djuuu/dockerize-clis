@@ -19,8 +19,8 @@ if [ "$DOCKERIZE_NODE" = true ]; then
         docker run $tty --interactive --rm \
             --user $NODE_USER \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $(pwd)):/code \
-            --workdir $(abspath '/code') \
+            --volume $(dockerize_bind_path $(pwd)):/code \
+            --workdir $(dockerize_path '/code') \
             $NODE_PUBLISH_PORTS \
             node:$NODE_VERSION node "$@"
     }
@@ -33,11 +33,11 @@ if [ "$DOCKERIZE_NPM" = true ]; then
         docker run $tty --interactive --rm \
             --user $NODE_USER \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $HOME/.config):$NODE_USER_HOME/.config \
-            --volume $(abspath $HOME/.npm):$NODE_USER_HOME/.npm \
-            --volume $(abspath $(pwd)):/code \
-            --workdir $(abspath '/code') \
-            --entrypoint $(abspath '/usr/local/bin/npm') \
+            --volume $(dockerize_bind_path $HOME/.config):$NODE_USER_HOME/.config \
+            --volume $(dockerize_bind_path $HOME/.npm):$NODE_USER_HOME/.npm \
+            --volume $(dockerize_bind_path $(pwd)):/code \
+            --workdir $(dockerize_path '/code') \
+            --entrypoint $(dockerize_path '/usr/local/bin/npm') \
             $NODE_PUBLISH_PORTS \
             node:$NODE_VERSION "$@"
     }
@@ -52,13 +52,13 @@ if [ "$DOCKERIZE_YARN" = true ]; then
         docker run $tty --interactive --rm \
             --user $NODE_USER \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $HOME/.config):$NODE_USER_HOME/.config \
-            --volume $(abspath $HOME/.cache):$NODE_USER_HOME/.cache \
-            --volume $(abspath $HOME/.npm):$NODE_USER_HOME/.npm \
-            --volume $(abspath $yarnFile):$yarnFile \
-            --volume $(abspath $(pwd)):/code \
-            --workdir $(abspath '/code') \
-            --entrypoint $(abspath '/usr/local/bin/yarn') \
+            --volume $(dockerize_bind_path $HOME/.config):$NODE_USER_HOME/.config \
+            --volume $(dockerize_bind_path $HOME/.cache):$NODE_USER_HOME/.cache \
+            --volume $(dockerize_bind_path $HOME/.npm):$NODE_USER_HOME/.npm \
+            --volume $(dockerize_bind_path $yarnFile):$yarnFile \
+            --volume $(dockerize_bind_path $(pwd)):/code \
+            --workdir $(dockerize_path '/code') \
+            --entrypoint $(dockerize_path '/usr/local/bin/yarn') \
             $NODE_PUBLISH_PORTS \
             node:$NODE_VERSION "$@"
     }

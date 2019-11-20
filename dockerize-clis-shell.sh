@@ -9,8 +9,8 @@ if [ "$DOCKERIZE_SHELLCHECK" = true ]; then
         tty -s && tty=--tty
         docker run $tty --interactive --rm \
             $DOCKER_COMMON_VOLUMES \
-            --volume $(abspath $(pwd)):/mnt \
-            --workdir $(abspath '/mnt') \
+            --volume $(dockerize_bind_path $(pwd)):/mnt \
+            --workdir $(dockerize_path '/mnt') \
             koalaman/shellcheck:$SHELLCHECK_VERSION "$@"
     }
 fi

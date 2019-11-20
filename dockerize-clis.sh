@@ -16,21 +16,32 @@ if [ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "cygwin" ]; then
     }
 fi
 
-# Prefix with slash to avoid MSYS Posix path conversion
-# @see
-#   https://github.com/moby/moby/issues/24029
-#   https://github.com/moby/moby/issues/12590
-#   https://github.com/dduportal-dockerfiles/docker-compose/issues/1
-#   http://www.mingw.org/wiki/Posix_path_conversion
-#   https://lmonkiewicz.com/programming/get-noticed-2017/docker-problems-on-windows/
-#   https://github.com/rprichard/winpty/issues/127
-function abspath {
-    if [ "$OSTYPE" == "msys" ]; then
-        echo -n '/'
-    fi
-    echo $1
+function dockerize_path {
+    local path=$1
+
+    # Prefix with "/" to avoid MSYS Posix path conversion
+    # @see
+    #   http://www.mingw.org/wiki/Posix_path_conversion
+    #   https://github.com/moby/moby/issues/12590
+    #   https://github.com/moby/moby/issues/24029
+    #   https://github.com/rprichard/winpty/issues/88
+    #   https://github.com/rprichard/winpty/issues/127
+    [ "$OSTYPE" == "msys" ] && path="/${path}"
+
+    echo $path
 }
 
+function dockerize_bind_path {
+    local path=$1
+
+    # Add "/host_mnt" prefix for Docker
+    # @see
+    #   https://docs.docker.com/v17.12/docker-for-windows/release-notes/docker-community-edition-17120-ce-win47-2018-01-12
+    #   https://github.com/docker/for-win/issues/1509#issuecomment-356419753
+    [ "$OSTYPE" == "msys" ] && path="/host_mnt${path}"
+
+    echo $(dockerize_path $path)
+}
 
 ################################################################################
 # Common configuration
