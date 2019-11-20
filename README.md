@@ -51,16 +51,16 @@ DOCKERIZE_YARN=false
 
 DOCKERIZE_SHELLCHECK=true
 
-PHP_VERSION=7.2
+PHP_VERSION=7.3
 
 PHP_PUBLISH_PORTS="" # ex: "--publish 8000:8000"
-PHP_USER=$(id -u):$(id -g)
+PHP_USER=$(id -u):$(id -g) # or: www-data
 
-NODE_VERSION=8
+NODE_VERSION=12
 
 NODE_PUBLISH_PORTS="" # ex: "--publish 3000:3000"
 NODE_USER=$(id -u):$(id -g) # or: node
-NODE_USER_HOME=$HOME # or: /home/node
+NODE_USER_HOME=/home/node
 
 SHELLCHECK_VERSION=stable
 
