@@ -9,6 +9,9 @@ NODE_PUBLISH_PORTS=${NODE_PUBLISH_PORTS:-""} # ex: "--publish 3000:3000"
 NODE_USER=${NODE_USER:-$(id -u):$(id -g)} # or: node
 NODE_USER_HOME=${NODE_USER_HOME:-/home/node}
 
+# Volumes mounted in every container
+DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
+
 
 if [ "$DOCKERIZE_NODE" = true ]; then
     # Alias might be set by node windows installation

@@ -50,8 +50,6 @@ DOCKERIZE_CLIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Volumes mounted in every container
 DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
-# # non-existant user workaround (Linux/Unices)
-# DOCKER_COMMON_VOLUMES="--volume /etc/passwd:/etc/passwd:ro --volume /etc/group:/etc/group:ro"
 
 
 ################################################################################

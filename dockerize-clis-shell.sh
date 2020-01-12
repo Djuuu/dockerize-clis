@@ -3,6 +3,10 @@ DOCKERIZE_SHELLCHECK=${DOCKERIZE_SHELLCHECK:-false}
 
 SHELLCHECK_VERSION=${SHELLCHECK_VERSION:-stable}
 
+# Volumes mounted in every container
+DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
+
+
 if [ "$DOCKERIZE_SHELLCHECK" = true ]; then
     function shellcheck {
         tty=

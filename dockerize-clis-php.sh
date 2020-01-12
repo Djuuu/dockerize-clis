@@ -11,6 +11,10 @@ PHP_USER=${PHP_USER:-$(id -u):$(id -g)} # or: www-data
 
 COMPOSER_HOME=${COMPOSER_HOME:-$HOME/.composer}
 
+# Volumes mounted in every container
+DOCKER_COMMON_VOLUMES=${DOCKER_COMMON_VOLUMES:-""}
+
+
 if [ "$DOCKERIZE_PHP" = true ]; then
     function php {
         tty=
