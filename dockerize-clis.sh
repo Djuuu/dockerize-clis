@@ -64,6 +64,8 @@ source $DOCKERIZE_CLIS_DIR/dockerize-clis-node.sh
 # NodeJS-related commands
 source $DOCKERIZE_CLIS_DIR/dockerize-clis-php.sh
 
+# Ansible-related commands
+source $DOCKERIZE_CLIS_DIR/dockerize-clis-ansible.sh
 
 ################################################################################
 # Common utilities
@@ -74,6 +76,7 @@ function docker_clis_pull {
     docker pull phpstan/phpstan
     docker pull node:$NODE_VERSION
     docker pull koalaman/shellcheck:$SHELLCHECK_VERSION
+    docker pull ansible/ansible-runner:$ANSIBLE_VERSION
 }
 
 function docker_clis_env {
@@ -85,6 +88,7 @@ function docker_clis_env {
     echo "DOCKERIZE_NPM        : $DOCKERIZE_NPM"
     echo "DOCKERIZE_YARN       : $DOCKERIZE_YARN"
     echo "DOCKERIZE_SHELLCHECK : $DOCKERIZE_SHELLCHECK"
+    echo "DOCKERIZE_ANSIBLE    : $DOCKERIZE_ANSIBLE"
     echo ""
     echo "PHP_VERSION        : $PHP_VERSION"
     echo "PHP_PUBLISH_PORTS  : $PHP_PUBLISH_PORTS"
@@ -98,6 +102,8 @@ function docker_clis_env {
     echo "NODE_USER_HOME     : $NODE_USER_HOME"
     echo ""
     echo "SHELLCHECK_VERSION: $SHELLCHECK_VERSION"
+    echo ""
+    echo "ANSIBLE_VERSION    : $ANSIBLE_VERSION"
     echo ""
     echo "DOCKER_COMMON_VOLUMES : $DOCKER_COMMON_VOLUMES"
 }
